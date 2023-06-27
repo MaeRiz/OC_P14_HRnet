@@ -1,4 +1,6 @@
 import { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const CreateEmployeeForm = () => {
   const [employeeForm, setEmployeeForm] = useState({
@@ -19,10 +21,17 @@ const CreateEmployeeForm = () => {
       [e.target.id]: e.target.value,
     }));
   };
+  const handdleChangeDate = (id, date) => {
+    setEmployeeForm((prevState) => ({
+      ...prevState,
+      [id]: date,
+    }));
+  };
 
   const handdleSubmit = (e) => {
     e.preventDefault();
     console.log(employeeForm);
+    console.log(employeeForm.birth.toLocaleDateString("en"));
   };
 
   return (
@@ -36,10 +45,22 @@ const CreateEmployeeForm = () => {
         <input type="text" id="lastName" onChange={(e) => handdleChange(e)} />
 
         <label htmlFor="birth">Date of Birth</label>
-        <input id="birth" type="text" />
+        <DatePicker
+          id="birth"
+          selected={employeeForm.birth}
+          onChange={(date) => {
+            handdleChangeDate("birth", date);
+          }}
+        />
 
         <label htmlFor="startDate">Start Date</label>
-        <input id="startDate" type="text" />
+        <DatePicker
+          id="startDate"
+          selected={employeeForm.startDate}
+          onChange={(date) => {
+            handdleChangeDate("startDate", date);
+          }}
+        />
 
         <fieldset className="address">
           <legend>Address</legend>
