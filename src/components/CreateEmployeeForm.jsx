@@ -1,37 +1,37 @@
 import { useState } from "react";
+
+import { STATES_OPTIONS, DEPARTEMENTS_OPTIONS } from "../data/data";
+
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+import Dropdown from "react-dropdown";
+import "react-dropdown/style.css";
+
 const CreateEmployeeForm = () => {
   const [employeeForm, setEmployeeForm] = useState({
-    firstName: "",
-    lastName: "",
-    birth: "",
-    startDate: "",
-    street: "",
-    City: "",
-    state: "",
-    zipCode: "",
-    departement: "",
+    firstName: null,
+    lastName: null,
+    birth: null,
+    startDate: null,
+    street: null,
+    city: null,
+    state: null,
+    zipCode: null,
+    departement: null,
   });
 
-  const handdleChange = (e) => {
+  const handdleChange = (id, value) => {
     setEmployeeForm((prevState) => ({
       ...prevState,
-      [e.target.id]: e.target.value,
-    }));
-  };
-  const handdleChangeDate = (id, date) => {
-    setEmployeeForm((prevState) => ({
-      ...prevState,
-      [id]: date,
+      [id]: value,
     }));
   };
 
   const handdleSubmit = (e) => {
     e.preventDefault();
     console.log(employeeForm);
-    console.log(employeeForm.birth.toLocaleDateString("en"));
+    // console.log(employeeForm.birth.toLocaleDateString("en"));
   };
 
   return (
@@ -39,17 +39,25 @@ const CreateEmployeeForm = () => {
       <h2>Create Employee</h2>
       <form action="#" id="create-employee">
         <label htmlFor="firstName">First Name</label>
-        <input type="text" id="firstName" onChange={(e) => handdleChange(e)} />
+        <input
+          type="text"
+          id="firstName"
+          onChange={(e) => handdleChange(e.target.id, e.target.value)}
+        />
 
         <label htmlFor="lastName">Last Name</label>
-        <input type="text" id="lastName" onChange={(e) => handdleChange(e)} />
+        <input
+          type="text"
+          id="lastName"
+          onChange={(e) => handdleChange(e.target.id, e.target.value)}
+        />
 
         <label htmlFor="birth">Date of Birth</label>
         <DatePicker
           id="birth"
           selected={employeeForm.birth}
           onChange={(date) => {
-            handdleChangeDate("birth", date);
+            handdleChange("birth", date);
           }}
         />
 
@@ -58,7 +66,7 @@ const CreateEmployeeForm = () => {
           id="startDate"
           selected={employeeForm.startDate}
           onChange={(date) => {
-            handdleChangeDate("startDate", date);
+            handdleChange("startDate", date);
           }}
         />
 
@@ -66,29 +74,43 @@ const CreateEmployeeForm = () => {
           <legend>Address</legend>
 
           <label htmlFor="street">Street</label>
-          <input id="street" type="text" onChange={(e) => handdleChange(e)} />
+          <input
+            id="street"
+            type="text"
+            onChange={(e) => handdleChange(e.target.id, e.target.value)}
+          />
 
           <label htmlFor="city">City</label>
-          <input id="city" type="text" onChange={(e) => handdleChange(e)} />
+          <input
+            id="city"
+            type="text"
+            onChange={(e) => handdleChange(e.target.id, e.target.value)}
+          />
 
           <label htmlFor="state">State</label>
-          <select name="state" id="state"></select>
+          <Dropdown
+            options={STATES_OPTIONS}
+            placeholder="Select State"
+            onChange={(e) => {
+              handdleChange("state", e.value);
+            }}
+          />
 
           <label htmlFor="zipCode">Zip Code</label>
           <input
             id="zipCode"
             type="number"
-            onChange={(e) => handdleChange(e)}
+            onChange={(e) => handdleChange(e.target.id, e.target.value)}
           />
         </fieldset>
         <label htmlFor="department">Department</label>
-        <select name="department" id="department">
-          <option>Sales</option>
-          <option>Marketing</option>
-          <option>Engineering</option>
-          <option>Human Resources</option>
-          <option>Legal</option>
-        </select>
+        <Dropdown
+          options={DEPARTEMENTS_OPTIONS}
+          placeholder="Select Departement"
+          onChange={(e) => {
+            handdleChange("departement", e.value);
+          }}
+        />
       </form>
       <button onClick={(e) => handdleSubmit(e)}>Save</button>
     </div>
