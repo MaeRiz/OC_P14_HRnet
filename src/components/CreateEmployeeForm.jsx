@@ -1,5 +1,8 @@
 import { useState } from "react";
 
+import { useDispatch } from "react-redux";
+import { addEmployee } from "../redux/employees.slice";
+
 import { STATES_OPTIONS, DEPARTEMENTS_OPTIONS } from "../data/data";
 
 import DatePicker from "react-datepicker";
@@ -9,6 +12,8 @@ import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 
 const CreateEmployeeForm = () => {
+  const dispatch = useDispatch();
+
   const [employeeForm, setEmployeeForm] = useState({
     firstName: null,
     lastName: null,
@@ -31,7 +36,7 @@ const CreateEmployeeForm = () => {
   const handdleSubmit = (e) => {
     e.preventDefault();
     console.log(employeeForm);
-    // console.log(employeeForm.birth.toLocaleDateString("en"));
+    dispatch(addEmployee(employeeForm));
   };
 
   return (
@@ -55,18 +60,20 @@ const CreateEmployeeForm = () => {
         <label htmlFor="birth">Date of Birth</label>
         <DatePicker
           id="birth"
-          selected={employeeForm.birth}
+          selected={employeeForm.birth ? new Date(employeeForm.birth) : null}
           onChange={(date) => {
-            handdleChange("birth", date);
+            handdleChange("birth", date.toLocaleDateString("en"));
           }}
         />
 
         <label htmlFor="startDate">Start Date</label>
         <DatePicker
           id="startDate"
-          selected={employeeForm.startDate}
+          selected={
+            employeeForm.startDate ? new Date(employeeForm.startDate) : null
+          }
           onChange={(date) => {
-            handdleChange("startDate", date);
+            handdleChange("startDate", date.toLocaleDateString("en"));
           }}
         />
 
