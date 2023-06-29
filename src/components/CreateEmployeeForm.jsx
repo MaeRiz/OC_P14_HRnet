@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addEmployee } from "../redux/employees.slice";
 
-import { STATES_OPTIONS, DEPARTEMENTS_OPTIONS } from "../data/data";
+import { STATES_OPTIONS, DEPARTMENTS_OPTIONS } from "../data/data";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -23,7 +23,7 @@ const CreateEmployeeForm = () => {
     city: null,
     state: null,
     zipCode: null,
-    departement: null,
+    department: null,
   });
 
   const handdleChange = (id, value) => {
@@ -112,10 +112,10 @@ const CreateEmployeeForm = () => {
         </fieldset>
         <label htmlFor="department">Department</label>
         <Dropdown
-          options={DEPARTEMENTS_OPTIONS}
-          placeholder="Select Departement"
+          options={DEPARTMENTS_OPTIONS}
+          placeholder="Select Department"
           onChange={(e) => {
-            handdleChange("departement", e.value);
+            handdleChange("department", e.value);
           }}
         />
       </form>
