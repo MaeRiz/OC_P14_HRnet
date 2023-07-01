@@ -11,9 +11,13 @@ import "react-datepicker/dist/react-datepicker.css";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 
+import Modal from "modal-react-lib";
+import "modal-react-lib/dist/index.css";
+
 const CreateEmployeeForm = () => {
   const dispatch = useDispatch();
 
+  const [openModal, setOpenModal] = useState(false);
   const [employeeForm, setEmployeeForm] = useState({
     firstName: null,
     lastName: null,
@@ -26,6 +30,11 @@ const CreateEmployeeForm = () => {
     department: null,
   });
 
+  const modal_content = {
+    title: "Modal Title",
+    text: "Modal content",
+  };
+
   const handdleChange = (id, value) => {
     setEmployeeForm((prevState) => ({
       ...prevState,
@@ -37,6 +46,7 @@ const CreateEmployeeForm = () => {
     e.preventDefault();
     console.log(employeeForm);
     dispatch(addEmployee(employeeForm));
+    setOpenModal(true);
   };
 
   return (
@@ -120,6 +130,11 @@ const CreateEmployeeForm = () => {
         />
       </form>
       <button onClick={(e) => handdleSubmit(e)}>Save</button>
+      <Modal
+        openState={openModal}
+        onRequestClose={setOpenModal}
+        content={modal_content}
+      />
     </div>
   );
 };
