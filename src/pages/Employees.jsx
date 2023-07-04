@@ -13,7 +13,7 @@ const Employees = () => {
 
   let formatedData = [];
 
-  data.map((item) => {
+  data.forEach((item) => {
     formatedData.push({
       ...item,
       birth: new Date(item.birth).toLocaleDateString("en"),
