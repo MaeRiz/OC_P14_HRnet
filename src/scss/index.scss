@@ -49,9 +49,11 @@ h1 {
     margin-bottom: 10px;
 }
 
-.sc-dlfmnT.liTKLQ.rdt_TableHeadRow {
-    background-color: #80808026;
-    border-radius: 8px 8px 0 0;
-    font-size: 1.1em;
-    font-weight: 600;
+.ka-cell-text {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.ka-table {
+    overflow: hidden;
 }
