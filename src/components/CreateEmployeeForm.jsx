@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import { useDispatch } from "react-redux";
 import { addEmployee } from "../redux/employees.slice";
@@ -16,7 +16,7 @@ import "modal-react-lib/dist/index.css";
 
 const CreateEmployeeForm = () => {
   const dispatch = useDispatch();
-
+  const refForm = useRef(null);
   const [openModal, setOpenModal] = useState(false);
   const [employeeForm, setEmployeeForm] = useState({
     firstName: null,
@@ -31,8 +31,8 @@ const CreateEmployeeForm = () => {
   });
 
   const modal_content = {
-    title: "Modal Title",
-    text: "Modal content",
+    title: "Perfect !",
+    text: `Employee ${employeeForm.firstName} created successfully !`,
   };
 
   const handdleChange = (id, value) => {
@@ -44,7 +44,7 @@ const CreateEmployeeForm = () => {
 
   const handdleSubmit = (e) => {
     e.preventDefault();
-    console.log(employeeForm);
+    refForm.current.reset();
     dispatch(addEmployee(employeeForm));
     setOpenModal(true);
   };
@@ -52,7 +52,7 @@ const CreateEmployeeForm = () => {
   return (
     <div className="container">
       <h2>Create Employee</h2>
-      <form action="#" id="create-employee">
+      <form action="#" id="create-employee" ref={refForm}>
         <label htmlFor="firstName">First Name</label>
         <input
           type="text"
