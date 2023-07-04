@@ -72,7 +72,7 @@ const CreateEmployeeForm = () => {
           id="birth"
           selected={employeeForm.birth ? new Date(employeeForm.birth) : null}
           onChange={(date) => {
-            handdleChange("birth", date.toLocaleDateString("en"));
+            handdleChange("birth", date.toJSON());
           }}
         />
 
@@ -83,7 +83,7 @@ const CreateEmployeeForm = () => {
             employeeForm.startDate ? new Date(employeeForm.startDate) : null
           }
           onChange={(date) => {
-            handdleChange("startDate", date.toLocaleDateString("en"));
+            handdleChange("startDate", date.toJSON());
           }}
         />
 

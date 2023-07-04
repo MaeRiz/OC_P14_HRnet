@@ -11,6 +11,16 @@ const Employees = () => {
   const [searchText, setSearchText] = useState("");
   const data = useSelector((state) => state.employees);
 
+  let formatedData = [];
+
+  data.map((item) => {
+    formatedData.push({
+      ...item,
+      birth: new Date(item.birth).toLocaleDateString("en"),
+      startDate: new Date(item.startDate).toLocaleDateString("en"),
+    });
+  });
+
   const columns = [
     {
       title: "First Name",
@@ -73,7 +83,7 @@ const Employees = () => {
       />
       <Table
         columns={columns}
-        data={data}
+        data={formatedData}
         rowKeyField={"firstName"}
         sortingMode={SortingMode.Single}
         columnResizing={true}
