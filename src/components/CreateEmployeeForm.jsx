@@ -104,7 +104,7 @@ const CreateEmployeeForm = () => {
             onChange={(e) => handdleChange(e.target.id, e.target.value)}
           />
 
-          <label htmlFor="state">State</label>
+          <label>State</label>
           <Dropdown
             options={STATES_OPTIONS}
             placeholder="Select State"
@@ -120,7 +120,7 @@ const CreateEmployeeForm = () => {
             onChange={(e) => handdleChange(e.target.id, e.target.value)}
           />
         </fieldset>
-        <label htmlFor="department">Department</label>
+        <label>Department</label>
         <Dropdown
           options={DEPARTMENTS_OPTIONS}
           placeholder="Select Department"
